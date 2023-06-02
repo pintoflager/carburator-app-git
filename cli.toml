@@ -1,0 +1,38 @@
+help = "Commands for interacting with the git client on the client host."
+
+# Integrated to the carburator
+########################################################
+
+# Clone
+#
+[command.clone]
+help = "Clone repository from the given path."
+platform = ["Client"]
+command = "git clone {{ path }}"
+
+[command.clone.args.path]
+help = "Path, remote or local to the git repository"
+value_is = "String"
+arg_index = 1
+required = true
+
+# Pull
+#
+[command.pull]
+help = "Pull changes from remote repository into the local one."
+platform = ["Client"]
+command = "git pull {{ path }} {{ branch | default('main') }}"
+
+[command.pull.args.path]
+help = "Remote path to the repository"
+value_is = "String"
+arg_index = 1
+required = true
+
+[command.pull.args.branch]
+help = "Remote repository branch to pull from. (defaults to 'main')"
+value_is = "String"
+arg_index = 2
+required = false
+
+########################################################

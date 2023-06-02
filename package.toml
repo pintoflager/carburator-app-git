@@ -1,0 +1,16 @@
+name = "git"
+version = "0.1.0"
+collection = "App"
+platforms = ["Client"]
+
+priority = 100
+provides = ["git"]
+
+[recommend]
+on_level = "Project"
+message = """
+Git client with partial integration with the carburator itself.
+Used for maintaining project state between multiple client nodes
+when project has grown into that phase. For simple setups this
+should be completely optional.
+"""

@@ -35,4 +35,23 @@ value_is = "String"
 arg_index = 2
 required = false
 
+# Push
+#
+[command.push]
+help = "Push local changes to remote repository."
+platform = ["Client"]
+command = "git push {{ branch_remote | default('main') }} {{ branch_local | default('main') }}"
+
+[command.push.args.branch_remote]
+help = "Remote repository branch to push to. (defaults to 'main')"
+value_is = "String"
+arg_index = 1
+required = false
+
+[command.push.args.branch_local]
+help = "Local repository branch to push from. (defaults to 'main')"
+value_is = "String"
+arg_index = 2
+required = false
+
 ########################################################

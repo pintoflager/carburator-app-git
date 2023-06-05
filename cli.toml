@@ -8,12 +8,18 @@ help = "Commands for interacting with the git client on the client host."
 [command.clone]
 help = "Clone repository from the given path."
 platform = ["Client"]
-command = "git clone {{ path }}"
+command = "git clone {{ path }} {{ target }}"
 
 [command.clone.args.path]
 help = "Path, remote or local to the git repository"
 value_is = "String"
 arg_index = 1
+required = true
+
+[command.clone.args.target]
+help = "Target directory on localhost where repository will be cloned to."
+value_is = "String"
+arg_index = 2
 required = true
 
 # Pull

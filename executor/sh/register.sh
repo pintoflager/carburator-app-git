@@ -1,5 +1,12 @@
 #!/usr/bin/env sh
 
+# ATTENTION: Supports only client nodes, pointless to read role from $1
+if [ "$1" = "server" ]; then
+    carburator print terminal error \
+        "Git registers only on client nodes. Package configuration error."
+    exit 120
+fi
+
 # Git client is required
 if ! carburator has program git; then
     carburator print terminal error \
@@ -9,22 +16,31 @@ else
     exit 0
 fi
 
+carburator prompt yes-no \
+    "Should we try to install git on your computer?" \
+        --yes-val "Yes try to install with a script" \
+        --no-val "No, I'll install everything myself"; exitcode=$?
+
+if [ $exitcode -ne 0 ]; then
+    exit 120
+fi
+
 # TODO: Untested below
 if carburator has program apt; then
-    apt-get -y update
-    apt-get -y install git
+    sudo apt-get -y update
+    sudo apt-get -y install git
 
 elif carburator has program pacman; then
-    pacman update
-    pacman -Sy git
+    sudo pacman update
+    sudo pacman -Sy git
 
 elif carburator has program yum; then
-    yum makecache --refresh
-    yum install -y git
+    sudo yum makecache --refresh
+    sudo yum install -y git
 
 elif carburator has program dnf; then
-    dnf makecache --refresh
-    dnf install -y git
+    sudo dnf makecache --refresh
+    sudo dnf install -y git
 
 else
     carburator print terminal error \

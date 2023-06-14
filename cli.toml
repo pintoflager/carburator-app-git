@@ -27,7 +27,7 @@ required = true
 [command.pull]
 help = "Pull changes from remote repository into the local one."
 platform = ["Client"]
-command = "git pull {{ path }} {{ branch | default('main') }}"
+command = "git -C {{ path }} pull . {{ branch | default('main') }}"
 
 [command.pull.args.path]
 help = "Remote path to the repository"
@@ -46,18 +46,24 @@ required = false
 [command.push]
 help = "Push local changes to remote repository."
 platform = ["Client"]
-command = "git push {{ branch_remote | default('main') }} {{ branch_local | default('main') }}"
+command = "git -C {{ path }} push {{ branch_remote | default('main') }} {{ branch_local | default('main') }}"
+
+[command.push.args.path]
+help = "Remote path to the repository"
+value_is = "String"
+arg_index = 1
+required = true
 
 [command.push.args.branch_remote]
 help = "Remote repository branch to push to. (defaults to 'main')"
 value_is = "String"
-arg_index = 1
+arg_index = 2
 required = false
 
 [command.push.args.branch_local]
 help = "Local repository branch to push from. (defaults to 'main')"
 value_is = "String"
-arg_index = 2
+arg_index = 3
 required = false
 
 ########################################################

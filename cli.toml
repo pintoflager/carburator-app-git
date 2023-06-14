@@ -22,21 +22,25 @@ value_is = "String"
 arg_index = 2
 required = true
 
-# Pull
+# Upgrage
 #
-[command.pull]
-help = "Pull changes from remote repository into the local one."
+[command.upgrade]
+help = "Upgrade changes from remote repository into the local one. (upgrade packages)"
 platform = ["Client"]
-command = "git -C {{ path }} pull . {{ branch | default('main') }}"
+command = """
+git -C {{ path }} fetch --all && \
+git -C {{ path }} branch backup-{{ branch | default('main') }} && \
+git -C {{ path }} reset --hard origin/{{ branch | default('main') }}
+"""
 
-[command.pull.args.path]
+[command.upgrade.args.path]
 help = "Remote path to the repository"
 value_is = "String"
 arg_index = 1
 required = true
 
-[command.pull.args.branch]
-help = "Remote repository branch to pull from. (defaults to 'main')"
+[command.upgrade.args.branch]
+help = "Remote repository branch to upgrade from. (defaults to 'main')"
 value_is = "String"
 arg_index = 2
 required = false

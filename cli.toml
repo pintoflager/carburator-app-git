@@ -27,7 +27,9 @@ required = true
 [command.upgrade]
 help = "Upgrade changes from remote repository into the local one. (packages)"
 platform = ["Client"]
-executor = "package/upgrade"
+
+[command.upgrade.executor]
+tail = "package/upgrade"
 
 [command.upgrade.args.path]
 help = "Remote path to the repository"

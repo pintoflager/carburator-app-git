@@ -1,6 +1,6 @@
 help = "Commands for interacting with the git client on the client host."
 
-# Integrated to the carburator
+# Integrated to carburator
 ########################################################
 
 # Clone

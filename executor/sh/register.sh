@@ -2,17 +2,17 @@
 
 # ATTENTION: Supports only client nodes, pointless to read role from $1
 if [ "$1" = "server" ]; then
-    carburator print terminal error \
+    carburator log error \
         "Git registers only on client nodes. Package configuration error."
     exit 120
 fi
 
 # Git client is required
 if ! carburator has program git; then
-    carburator print terminal error \
+    carburator log error \
         "Missing required program git. Trying to install..."
 else
-    carburator print terminal success "Git client found from the host"
+    carburator log success "Git client found from the host"
     exit 0
 fi
 
@@ -43,7 +43,7 @@ elif carburator has program dnf; then
     sudo dnf install -y git
 
 else
-    carburator print terminal error \
+    carburator log error \
         "Unable to detect linux package manager from client node"
     exit 120
 fi

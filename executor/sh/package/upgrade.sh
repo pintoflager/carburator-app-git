@@ -4,7 +4,7 @@ path="$1"
 branch="$2"
 
 if [ -z "$path" ]; then
-	carburator print terminal error \
+	carburator log error \
         "Full path to repository root dir has to be provided as \$1"
 	exit 120
 fi
